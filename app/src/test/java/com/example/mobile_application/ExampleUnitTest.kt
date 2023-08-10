@@ -1,4 +1,4 @@
-package com.example.meumenuapp
+package com.example.mobile_application
 
 import org.junit.Test
 

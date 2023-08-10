@@ -1,4 +1,4 @@
-package com.example.meumenuapp
+package com.example.mobile_application
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
