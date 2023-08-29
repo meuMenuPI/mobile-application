@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/cor_fundo_padrao"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="80dp">
+
+        <!--Início Divisão seta X 'Cadastro'-->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/seta_preta_voltar"
+                    android:id="@+id/id_seta_left2_contato1"
+                    android:layout_height="match_parent">
+            </ImageView>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_toEndOf="@id/id_seta_left2_contato1"
+                    android:text="Cadastro"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:textFontWeight="500"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent" android:layout_marginStart="9dp">
+            </TextView>
+
+        </RelativeLayout>
+        <!--Fim Divisão seta X 'Cadastro'-->
+    </LinearLayout>
+    <!--Fim header 'Cadastro'-->
+
+    <RelativeLayout
+            android:layout_width="385dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="160dp"
+                android:id="@+id/id_txt_senha_contato1"
+                android:text="Informações de contato:"
+                android:textSize="22dp"
+
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+                android:layout_width="220dp"
+                android:id="@+id/id_sobre_senha_contato1"
+                android:layout_below="@id/id_txt_senha_contato1"
+                android:layout_marginTop="20dp"
+                android:text="Se você esquecer sua senha será possível recuperar
+                 o acesso pelo celular e e-mail, mantenha atualizado."
+                android:textFontWeight="800"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:layout_height="wrap_content">
+        </TextView>
+
+        <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/id_input_senha_contato1"
+                android:layout_below="@id/id_sobre_senha_contato1"
+                android:text="(xx) xxxxx-xxxx"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:textAlignment="textStart"
+                android:background="@drawable/edit_text_border"
+                android:layout_height="50dp">
+        </EditText>
+
+<!--        <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:id="@+id/id_input_senha_confirmada"-->
+<!--                android:layout_below="@id/id_input_senha"-->
+<!--                android:text="Confirmar nova senha"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:layout_marginTop="25dp"-->
+<!--                android:textAlignment="textStart"-->
+<!--                android:background="@drawable/edit_text_border"-->
+<!--                android:layout_height="50dp">-->
+<!--        </EditText>-->
+
+        <Button
+                android:layout_width="150dp"
+                android:id="@+id/id_button2_contato1"
+                android:text="Continuar"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#8D0000"
+                android:background="@drawable/custom_button_background"
+                android:layout_below="@id/id_input_senha_contato1"
+                android:layout_height="wrap_content">
+        </Button>
+    </RelativeLayout>
+</LinearLayout>
