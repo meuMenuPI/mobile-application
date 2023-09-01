@@ -54,14 +54,31 @@
             />
 
         <Button
-            android:layout_width="200dp"
+            android:id="@+id/button"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:layout_marginStart="36dp"
             android:text="Seguindo"
             android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:backgroundTint="#E8CBE2"
+            android:textColor="@color/black"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Ver mapa"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:backgroundTint="#E8CBE2"
+            android:textColor="@color/black"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,7 +98,7 @@
             android:background="@drawable/perfil_loja_unselect"
             android:backgroundTint="#198D0000"
             android:text="Cardápio"
-            android:textColor="@color/black"></Button>
+            android:textColor="@color/black"/>
 
         <Button
             android:layout_width="0dp"
