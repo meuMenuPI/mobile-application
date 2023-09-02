@@ -27,7 +27,7 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_toEndOf="@id/id_seta_left2_contato2"
-                    android:text="Cadastro"
+                    android:text="Contato"
                     android:textSize="30dp"
                     android:textColor="@color/black"
                     android:textFontWeight="500"

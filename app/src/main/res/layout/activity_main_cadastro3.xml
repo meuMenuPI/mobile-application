@@ -6,7 +6,7 @@
 
 
     <LinearLayout
-            android:id="@+id/id_header_contato3"
+            android:id="@+id/id_header_cadastro3"
             android:layout_width="385dp"
             android:orientation="horizontal"
             android:layout_height="80dp">
@@ -20,13 +20,13 @@
                     android:layout_width="40dp"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/seta_preta_voltar"
-                    android:id="@+id/id_seta_left2_contato3"
+                    android:id="@+id/id_seta_left2_cadastro3"
                     android:layout_height="match_parent">
             </ImageView>
 
             <TextView
                     android:layout_width="match_parent"
-                    android:layout_toEndOf="@id/id_seta_left2_contato3"
+                    android:layout_toEndOf="@id/id_seta_left2_cadastro3"
                     android:text="Cadastro"
                     android:textSize="30dp"
                     android:textColor="@color/black"
@@ -43,8 +43,8 @@
 
 
     <LinearLayout
-            android:id="@+id/id_teste_contato3"
-            android:layout_below="@id/id_header_contato3"
+            android:id="@+id/id_teste_cadastro3"
+            android:layout_below="@id/id_header_cadastro3"
             android:layout_width="385dp"
             android:gravity="center"
             android:orientation="vertical"
@@ -61,15 +61,15 @@
                 android:text="Declaração:"
                 android:textSize="20dp"
                 android:textFontWeight="500"
-                android:id="@+id/id_declaracao_contato3"
+                android:id="@+id/id_declaracao_cadastro3"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content">
         </TextView>
 
         <TextView
                 android:layout_width="match_parent"
-                android:id="@+id/id_termos_contato3"
-                android:layout_below="@id/id_declaracao_contato3"
+                android:id="@+id/id_termos_cadastro3"
+                android:layout_below="@id/id_declaracao_cadastro3"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/purple_700"
                 android:textFontWeight="900"
@@ -79,8 +79,8 @@
 
             <LinearLayout
                     android:layout_marginTop="20dp"
-                    android:id="@+id/id_div_check_contato3"
-                    android:layout_below="@id/id_termos_contato3"
+                    android:id="@+id/id_div_check_cadastro3"
+                    android:layout_below="@id/id_termos_cadastro3"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
@@ -88,18 +88,18 @@
                 <CheckBox
                         android:layout_width="40dp"
                         android:layout_marginLeft="-10dp"
-                        android:id="@+id/id_checkbox_contato3"
-                        android:layout_below="@id/id_termos_contato3"
+                        android:id="@+id/id_checkbox_cadastro3"
+                        android:layout_below="@id/id_termos_cadastro3"
                         android:layout_height="wrap_content">
                 </CheckBox>
 
                 <TextView
                         android:layout_width="wrap_content"
-                        android:id="@+id/id_text_checkbox_contato3"
-                        android:layout_below="@id/id_termos_contato3"
+                        android:id="@+id/id_text_checkbox_cadastro3"
+                        android:layout_below="@id/id_termos_cadastro3"
                         android:textColor="@color/black"
 
-                        android:layout_alignLeft="@id/id_checkbox_contato3"
+                        android:layout_alignLeft="@id/id_checkbox_cadastro3"
                         android:text="Declaro que li e aceito os termos de uso."
                         android:layout_height="wrap_content">
 
@@ -108,13 +108,13 @@
 
             <Button
                     android:layout_width="150dp"
-                    android:id="@+id/id_button3_contato3"
+                    android:id="@+id/id_button3_cadastro3"
                     android:text="Continuar"
                     android:fontFamily="sans-serif"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="#8D0000"
                     android:background="@drawable/custom_button_background"
-                    android:layout_below="@id/id_div_check_contato3"
+                    android:layout_below="@id/id_div_check_cadastro3"
                     android:layout_height="wrap_content">
             </Button>
 
