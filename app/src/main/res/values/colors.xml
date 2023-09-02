@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cor_fundo_padrao">#FFFBF7</color>
+    <color name="cor_botao_sucesso">#69CE5D</color>
+
 </resources>
