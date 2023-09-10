@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/icone_seta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/icone_seta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Editar Dados"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icone_seta"
+        app:layout_constraintStart_toEndOf="@+id/icone_seta" />
+
+    <TextView
+        android:id="@+id/tv_alteracao_de_dados"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="A alteração de dados cadastrais está sujeita a aprovação."
+        android:layout_marginTop="70dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/icone_seta"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <ImageView
+        android:id="@+id/icone_contato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingTop="16dp"
+        android:src="@drawable/contacts"
+        app:layout_constraintStart_toStartOf="@id/icone_seta"
+        app:layout_constraintTop_toBottomOf="@+id/tv_alteracao_de_dados" />
+
+
+    <TextView
+        android:id="@+id/contato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:text="Contato"
+        app:layout_constraintStart_toEndOf="@+id/icone_contato"
+        app:layout_constraintTop_toTopOf="@+id/icone_contato" />
+
+    <TextView
+        android:id="@+id/tv_numero_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Numero de celular e email"
+        app:layout_constraintStart_toStartOf="@+id/contato"
+        app:layout_constraintTop_toBottomOf="@+id/contato" />
+
+    <ImageView
+        android:id="@+id/iv_icone_endereco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="16dp"
+        android:src="@drawable/home_pin"
+        app:layout_constraintStart_toStartOf="@id/icone_seta"
+        app:layout_constraintTop_toBottomOf="@+id/icone_contato" />
+
+
+    <TextView
+        android:id="@+id/tv_endereco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:text="Endereço"
+        app:layout_constraintStart_toEndOf="@+id/iv_icone_endereco"
+        app:layout_constraintTop_toTopOf="@+id/iv_icone_endereco" />
+
+    <TextView
+        android:id="@+id/tv_estado_cidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado, cidade e comprovante de residência"
+        app:layout_constraintStart_toStartOf="@+id/tv_endereco"
+        app:layout_constraintTop_toBottomOf="@+id/tv_endereco" />
+
+    <ImageView
+        android:id="@+id/iv_icone_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="16dp"
+        android:src="@drawable/badge"
+        app:layout_constraintStart_toStartOf="@id/icone_seta"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icone_endereco" />
+
+
+    <TextView
+        android:id="@+id/tv_dados_pessoais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        android:text="Dados Pessoais"
+        app:layout_constraintStart_toEndOf="@+id/iv_icone_badge"
+        app:layout_constraintTop_toTopOf="@+id/iv_icone_badge" />
+
+    <TextView
+        android:id="@+id/tv_nome_data_cpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome, data de nascimento e CPF"
+        app:layout_constraintStart_toStartOf="@+id/tv_dados_pessoais"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dados_pessoais" />
+
+    <ImageView
+        android:id="@+id/iv_icone_cadeado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="16dp"
+        android:src="@drawable/lock"
+        app:layout_constraintStart_toStartOf="@id/icone_seta"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icone_badge" />
+
+
+    <TextView
+        android:id="@+id/tv_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:text="Contato"
+        app:layout_constraintStart_toEndOf="@+id/iv_icone_cadeado"
+        app:layout_constraintTop_toTopOf="@+id/iv_icone_cadeado" />
+
+    <TextView
+        android:id="@+id/tv_altarar_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alteração de senha"
+        app:layout_constraintStart_toStartOf="@+id/tv_senha"
+        app:layout_constraintTop_toBottomOf="@+id/tv_senha" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
