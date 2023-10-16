@@ -1,5 +1,6 @@
 package com.example.mobile_application
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -55,9 +56,13 @@ class Logar : AppCompatActivity() {
                     val editor = prefs.edit()
                     editor.putString("ID", response.body()?.id.toString())
                     editor.apply()
-                    val token  = prefs.getString("TOKEN", null) ?: ""
-                    Log.d("ID", token)
                     Toast.makeText(baseContext, "Logado!", Toast.LENGTH_LONG).show()
+
+                    val i = Intent(
+                        this@Logar,
+                        MainActivity::class.java
+                    )
+                    startActivity(i)
                 }
                else{
                    Log.d("ERRO", response.toString())
