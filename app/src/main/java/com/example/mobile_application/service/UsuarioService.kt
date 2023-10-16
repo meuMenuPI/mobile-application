@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface UsuarioService {
-    @POST("/usuarios/logar")
-    fun logar(@Body dados : LoginRequest):
+    @POST("usuarios/logar")
+    fun entrar(@Body dados : LoginRequest):
             retrofit2.Call<Usuario>
 }

@@ -7,8 +7,8 @@ android {
     namespace = "com.example.mobile_application"
     compileSdk = 33
 
-    viewBinding {
-        enable = true
+    buildFeatures {
+        viewBinding = true
     }
 
     defaultConfig {
