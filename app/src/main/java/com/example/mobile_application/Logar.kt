@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityLogarBinding
 import com.example.mobile_application.models.LoginRequest
@@ -38,6 +39,15 @@ class Logar : AppCompatActivity() {
         }
 
     }
+
+    private fun showErroCadastro(){
+        AlertDialog.Builder(this)
+            .setTitle("Erro")
+            .setMessage("Email ou senha incorretos, por favor tente novamente")
+            .setNeutralButton("Ok", null)
+            .create()
+            .show()
+    }
     private fun logar (){
 
         val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
@@ -66,7 +76,7 @@ class Logar : AppCompatActivity() {
                 }
                else{
                    Log.d("ERRO", response.toString())
-                    Toast.makeText(baseContext, response.toString(), Toast.LENGTH_LONG).show()
+                    showErroCadastro()
                 }
            }
 
