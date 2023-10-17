@@ -328,18 +328,19 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
+            android:layout_width="130dp"
             android:layout_marginRight="5dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="80dp"
+
+            >
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/borda_imagem"
                 android:src="@drawable/sushi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/borda_imagem"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
