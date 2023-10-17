@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AlertDialog
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityLogarBinding
 import com.example.mobile_application.models.LoginRequest
@@ -33,12 +34,6 @@ class Logar : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        val i = Intent(
-            this@Logar,
-            MenuPrincipal::class.java
-        )
-        startActivity(i)
-
         val meuBotao = findViewById<Button>(R.id.buttonEntrar)
 
 
@@ -46,6 +41,15 @@ class Logar : AppCompatActivity() {
             logar()
         }
 
+    }
+
+    private fun showErroCadastro(){
+        AlertDialog.Builder(this)
+            .setTitle("Erro")
+            .setMessage("Email ou senha incorretos, por favor tente novamente")
+            .setNeutralButton("Ok", null)
+            .create()
+            .show()
     }
     private fun logar (){
 
@@ -75,7 +79,7 @@ class Logar : AppCompatActivity() {
                 }
                else{
                    Log.d("ERRO", response.toString())
-                    Toast.makeText(baseContext, response.toString(), Toast.LENGTH_LONG).show()
+                    showErroCadastro()
                 }
            }
 
