@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityLogarBinding
 import com.example.mobile_application.models.LoginRequest
@@ -29,6 +30,14 @@ class Logar : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logar)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        val i = Intent(
+            this@Logar,
+            MenuPrincipal::class.java
+        )
+        startActivity(i)
 
         val meuBotao = findViewById<Button>(R.id.buttonEntrar)
 
@@ -60,7 +69,7 @@ class Logar : AppCompatActivity() {
 
                     val i = Intent(
                         this@Logar,
-                        MainActivity::class.java
+                        MenuPrincipal::class.java
                     )
                     startActivity(i)
                 }
