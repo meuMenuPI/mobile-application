@@ -34,7 +34,7 @@ class MenuPrincipal : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu_principal)
+        setContentView(binding.root)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -112,7 +112,7 @@ class MenuPrincipal : AppCompatActivity() {
 
                     constraintLayoutAvaliado.addView(image)
                     constraintLayoutAvaliado.addView(nm_restaurante)
-                    findViewById<LinearLayout>(R.id.linearLayout4).addView(constraintLayoutAvaliado)
+                   binding.linearLayout4.addView(constraintLayoutAvaliado)
                 }
             }
 
@@ -192,7 +192,7 @@ class MenuPrincipal : AppCompatActivity() {
 
                     constraintLayoutAvaliado.addView(image)
                     constraintLayoutAvaliado.addView(nm_restaurante)
-                    findViewById<LinearLayout>(R.id.linearLayout5).addView(constraintLayoutAvaliado)
+                    binding.linearLayout5.addView(constraintLayoutAvaliado)
                 }
             }
 
