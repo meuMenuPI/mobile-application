@@ -30,11 +30,12 @@ class Logar : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_logar)
+        setContentView(binding.root)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        val meuBotao = findViewById<Button>(R.id.buttonEntrar)
+        //val meuBotao = findViewById<Button>(R.id.buttonEntrar)
+        val meuBotao = binding.buttonEntrar
 
 
         meuBotao.setOnClickListener {
@@ -53,8 +54,11 @@ class Logar : AppCompatActivity() {
     }
     private fun logar (){
 
-        val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
-        val editTextSenha = findViewById<EditText>(R.id.editTextPassword)
+        //val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
+        //val editTextSenha = findViewById<EditText>(R.id.editTextPassword)
+
+        val editTextEmail = binding.editTextEmail
+        val editTextSenha = binding.editTextPassword
 
        val dados = LoginRequest(
            editTextEmail.text.toString(),
@@ -73,7 +77,7 @@ class Logar : AppCompatActivity() {
 
                     val i = Intent(
                         this@Logar,
-                        MenuPrincipal::class.java
+                        EmailContato::class.java
                     )
                     startActivity(i)
                 }
