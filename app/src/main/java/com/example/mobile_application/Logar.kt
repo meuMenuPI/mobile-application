@@ -77,7 +77,7 @@ class Logar : AppCompatActivity() {
 
                     val i = Intent(
                         this@Logar,
-                        MenuPrincipal::class.java
+                        EmailContato::class.java
                     )
                     startActivity(i)
                 }

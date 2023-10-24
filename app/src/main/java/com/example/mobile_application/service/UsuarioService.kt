@@ -3,11 +3,23 @@ package com.example.mobile_application.service
 
 import com.example.mobile_application.models.LoginRequest
 import com.example.mobile_application.models.Usuario
+import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface UsuarioService {
     @POST("usuarios/logar")
     fun entrar(@Body dados : LoginRequest):
             retrofit2.Call<Usuario>
+
+    @PUT("usuarios/emailUsuario")
+    fun gerarCodigo(@Query("id") id : Int, @Query("emailNovo") emailNovo : String):
+            Call<Usuario>
+
+    @GET("usuarios/validarEmail")
+    fun validarCodigo(@Query("codigo") codigo : String,@Query("id") id : Int, @Query("novoEmail") novoEmail : String):
+            Call<Usuario>
 }
