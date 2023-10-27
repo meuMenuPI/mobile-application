@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
+        tools:context=".Cadastro"
+        android:id="@+id/id_container_cadastro1"
         android:backgroundTint="@color/cor_fundo_padrao"
         android:orientation="vertical">
     <!--Início header 'Cadastro'-->
@@ -15,32 +16,32 @@
             android:layout_height="80dp">
 
         <!--Início Divisão seta X 'Cadastro'-->
-            <RelativeLayout
-                    android:layout_width="match_parent"
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/seta_preta_voltar"
+                    android:id="@+id/id_seta_left_cadastro1"
                     android:layout_height="match_parent">
+            </ImageView>
 
-                <ImageView
-                        android:layout_width="40dp"
-                        android:layout_marginLeft="8dp"
-                        android:src="@drawable/seta_preta_voltar"
-                        android:id="@+id/id_seta_left_cadastro1"
-                        android:layout_height="match_parent">
-                </ImageView>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_toEndOf="@id/id_seta_left_cadastro1"
+                    android:text="Cadastro"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:textFontWeight="500"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent">
+            </TextView>
 
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_toEndOf="@id/id_seta_left_cadastro1"
-                        android:text="Cadastro"
-                        android:textSize="30dp"
-                        android:textColor="@color/black"
-                        android:textFontWeight="500"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent">
-                </TextView>
-
-            </RelativeLayout>
+        </RelativeLayout>
         <!--Fim Divisão seta X 'Cadastro'-->
     </LinearLayout>
     <!--Fim header 'Cadastro'-->
@@ -64,9 +65,21 @@
                 android:layout_width="match_parent"
                 android:id="@+id/id_input_nome_cadastro1"
                 android:layout_below="@id/id_txt_dados_pessoais_cadastro1"
-                android:text="Nome completo"
+                android:hint="Nome"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
+                android:textAlignment="textStart"
+                android:background="@drawable/edit_text_border"
+                android:layout_height="50dp">
+        </EditText>
+
+        <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/id_input_sobrenome_cadastro1"
+                android:layout_below="@id/id_input_nome_cadastro1"
+                android:hint="Sobrenome"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="15dp"
                 android:textAlignment="textStart"
                 android:background="@drawable/edit_text_border"
                 android:layout_height="50dp">
@@ -75,22 +88,10 @@
         <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/id_input_cpf_cadastro1"
-                android:layout_below="@id/id_input_nome_cadastro1"
-                android:text="CPF"
+                android:layout_below="@id/id_input_sobrenome_cadastro1"
+                android:hint="CPF"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="25dp"
-                android:textAlignment="textStart"
-                android:background="@drawable/edit_text_border"
-                android:layout_height="50dp">
-        </EditText>
-
-        <EditText
-                android:layout_width="match_parent"
-                android:id="@+id/id_input_celular_cadastro1"
-                android:layout_below="@id/id_input_cpf_cadastro1"
-                android:text="Celular"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:textAlignment="textStart"
                 android:background="@drawable/edit_text_border"
                 android:layout_height="50dp">
@@ -99,15 +100,58 @@
         <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/id_input_email_cadastro1"
-                android:layout_below="@id/id_input_celular_cadastro1"
-                android:text="E-mail"
+                android:layout_below="@id/id_input_cpf_cadastro1"
+                android:hint="E-mail"
                 android:paddingLeft="10dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:textAlignment="textStart"
                 android:background="@drawable/edit_text_border"
                 android:layout_height="50dp">
         </EditText>
 
+        <RadioGroup
+                android:id="@+id/radioGroupOpcoes"
+                android:layout_below="@id/id_input_email_cadastro1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/id_txt_especialidades"
+                    android:layout_below="@id/id_input_cpf_cadastro1"
+                    android:text="Tipo de comida preferida:"
+                    android:textSize="20dp"
+                    android:layout_marginTop="25dp"
+                    android:textAlignment="textStart"
+                    android:textStyle="bold"
+                    android:layout_height="40dp">
+            </TextView>
+
+            <RadioButton
+                    android:id="@+id/MEXICANA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MEXICANA"/>
+
+            <RadioButton
+                    android:id="@+id/BRASILEIRA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BRASILEIRA"/>
+
+            <RadioButton
+                    android:id="@+id/JAPONESA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JAPONESA"/>
+
+            <RadioButton
+                    android:id="@+id/CHINESA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CHINESA"/>
+        </RadioGroup>
         <Button
                 android:layout_width="150dp"
                 android:id="@+id/id_button_cadastro1"
@@ -116,7 +160,7 @@
                 android:layout_marginTop="30dp"
                 android:backgroundTint="#8D0000"
                 android:background="@drawable/custom_button_background"
-                android:layout_below="@id/id_input_email_cadastro1"
+                android:layout_below="@id/radioGroupOpcoes"
                 android:layout_height="wrap_content">
         </Button>
 
