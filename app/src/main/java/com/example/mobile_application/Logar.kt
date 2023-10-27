@@ -42,6 +42,20 @@ class Logar : AppCompatActivity() {
             logar()
         }
 
+        val buttonLogin = binding.buttonLogin
+
+        buttonLogin.setOnClickListener {
+            irParaCadastro()
+        }
+
+    }
+
+    private fun irParaCadastro() {
+        val i = Intent(
+            this@Logar,
+            Cadastro::class.java
+        )
+        startActivity(i)
     }
 
     private fun showErroCadastro(){

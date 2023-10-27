@@ -1,6 +1,7 @@
 package com.example.mobile_application.service
 
 
+import com.example.mobile_application.models.CadastroRequest
 import com.example.mobile_application.models.LoginRequest
 import com.example.mobile_application.models.Usuario
 import retrofit2.Call
@@ -22,4 +23,8 @@ interface UsuarioService {
     @GET("usuarios/validarEmail")
     fun validarCodigo(@Query("codigo") codigo : String,@Query("id") id : Int, @Query("novoEmail") novoEmail : String):
             Call<Usuario>
+
+    @POST("usuarios/cadastrar")
+    fun cadastrar(@Body dadosRequest: CadastroRequest):
+            retrofit2.Call<Usuario>
 }
