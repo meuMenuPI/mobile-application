@@ -1,5 +1,6 @@
 package com.example.mobile_application
 
+import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -47,7 +49,6 @@ class MenuPrincipal : AppCompatActivity() {
                 call: Call<List<RestauranteReviewDto>>,
                 response: Response<List<RestauranteReviewDto>>
             ) {
-
 
                 val restaurantes = response.body()
                 restaurantes?.forEach{restaurante ->
@@ -106,8 +107,14 @@ class MenuPrincipal : AppCompatActivity() {
                     constraintLayoutAvaliado.setOnClickListener{
                         val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
                         val editor = prefs.edit()
-                        editor.putString("ID", restaurante.id.toString())
+                        editor.putInt("ID", restaurante.id)
+                        editor.putString("NOME", nm_restaurante.text.toString())
                         editor.apply()
+                        val i = Intent(
+                            this@MenuPrincipal,
+                            RestauranteReview::class.java
+                        )
+                        startActivity(i)
                     }
 
                     constraintLayoutAvaliado.addView(image)
