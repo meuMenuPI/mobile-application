@@ -8,9 +8,9 @@ object Rest {
         return Retrofit
             .Builder()
             //AWS
-    //        .baseUrl("http://23.21.123.201:8080/meumenu")
+            .baseUrl("https://meumenuweb.ddns.net/meumenu/")
             //Emulador
-            .baseUrl("http:/10.0.2.2:8080/meumenu/")
+    //        .baseUrl("http:/10.0.2.2:8080/meumenu/")
             //Pc Lucas
     //        .baseUrl("http:/192.168.18.41:8080/meumenu/")
             .addConverterFactory(GsonConverterFactory.create())

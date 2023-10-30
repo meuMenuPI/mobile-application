@@ -1,21 +1,17 @@
 package com.example.mobile_application
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginRight
 import androidx.core.view.setPadding
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityMenuPrincipalBinding
@@ -24,6 +20,7 @@ import com.example.mobile_application.service.RestauranteService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MenuPrincipal : AppCompatActivity() {
 
@@ -37,6 +34,31 @@ class MenuPrincipal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.btnPerfil.setOnClickListener {
+            val i = Intent(
+                this@MenuPrincipal,
+                PerfilUsuario::class.java
+            )
+            startActivity(i)
+        }
+
+        binding.btnSair.setOnClickListener {
+            val sharedPreferences: SharedPreferences =
+                baseContext.getSharedPreferences("USUARIO", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            val sharedPreferences2: SharedPreferences =
+                baseContext.getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
+            val editor2 = sharedPreferences.edit()
+            editor2.clear()
+            editor2.apply()
+
+            val i = Intent(
+                this@MenuPrincipal,
+                Logar::class.java
+            )
+            startActivity(i)
+        }
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 

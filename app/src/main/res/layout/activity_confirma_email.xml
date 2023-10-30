@@ -21,13 +21,13 @@
                 android:layout_width="40dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/seta_preta_voltar"
-                android:id="@+id/id_seta_left2_contato4"
+                android:id="@+id/btnVltContato"
                 android:layout_height="match_parent">
             </ImageView>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_toEndOf="@id/id_seta_left2_contato4"
+                android:layout_toEndOf="@id/btnVltContato"
                 android:text="Contato"
                 android:textSize="30dp"
                 android:textColor="@color/black"

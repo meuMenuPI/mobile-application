@@ -35,6 +35,13 @@ class Cadastro : AppCompatActivity() {
         meuBotaoCadastrar.setOnClickListener {
             cadastrar()
         }
+
+        binding.btnVltMenu.setOnClickListener {
+            val intent = Intent(
+                this@Cadastro,
+                MenuPrincipal::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun cadastrar() {

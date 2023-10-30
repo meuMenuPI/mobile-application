@@ -30,6 +30,18 @@ class Logar : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val prefs = getSharedPreferences("USUARIO", MODE_PRIVATE)
+        val id = prefs.getString("ID",null)
+
+        if(id != null){
+            val i = Intent(
+                this@Logar,
+                MenuPrincipal::class.java
+            )
+            startActivity(i)
+        }
+
         setContentView(binding.root)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -37,6 +49,14 @@ class Logar : AppCompatActivity() {
         //val meuBotao = findViewById<Button>(R.id.buttonEntrar)
         val meuBotao = binding.buttonEntrar
 
+
+        binding.textCadastro.setOnClickListener{
+            val i = Intent(
+                this@Logar,
+                Cadastro::class.java
+            )
+            startActivity(i)
+        }
 
         meuBotao.setOnClickListener {
             logar()
@@ -86,6 +106,8 @@ class Logar : AppCompatActivity() {
                     val prefs = getSharedPreferences("USUARIO", MODE_PRIVATE)
                     val editor = prefs.edit()
                     editor.putString("ID", response.body()?.id.toString())
+                    editor.putString("NOME", response.body()?.nome.toString())
+                    editor.putString("EMAIL", response.body()?.email.toString())
                     editor.apply()
                     Toast.makeText(baseContext, "Logado!", Toast.LENGTH_LONG).show()
 

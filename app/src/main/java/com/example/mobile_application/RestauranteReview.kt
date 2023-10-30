@@ -1,5 +1,6 @@
 package com.example.mobile_application
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -32,6 +33,14 @@ class RestauranteReview : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.btnVltMenu.setOnClickListener{
+            val i = Intent(
+                this@RestauranteReview,
+                MenuPrincipal::class.java
+            )
+            startActivity(i)
+        }
 
         val pref = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
         val id = pref.getInt("ID", 0)

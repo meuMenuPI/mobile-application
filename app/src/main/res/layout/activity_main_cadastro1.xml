@@ -24,13 +24,13 @@
                     android:layout_width="40dp"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/seta_preta_voltar"
-                    android:id="@+id/id_seta_left_cadastro1"
+                    android:id="@+id/btnVltMenu"
                     android:layout_height="match_parent">
             </ImageView>
 
             <TextView
                     android:layout_width="match_parent"
-                    android:layout_toEndOf="@id/id_seta_left_cadastro1"
+                    android:layout_toEndOf="@id/btnVltMenu"
                     android:text="Cadastro"
                     android:textSize="30dp"
                     android:textColor="@color/black"

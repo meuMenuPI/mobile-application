@@ -30,6 +30,14 @@ class ConfirmaEmail : AppCompatActivity() {
         binding.btContinuar.setOnClickListener{
             confirmarEmail()
         }
+
+        binding.btnVltContato.setOnClickListener {
+            val i = Intent(
+                this@ConfirmaEmail,
+                EmailContato::class.java
+            )
+            startActivity(i)
+        }
     }
 
     fun confirmarEmail(){

@@ -32,6 +32,14 @@ class EmailContato : AppCompatActivity() {
             guardarEmailTemp()
         }
 
+        binding.btnVlt.setOnClickListener {
+            val i = Intent(
+                this@EmailContato,
+                PerfilUsuario::class.java
+            )
+            startActivity(i)
+        }
+
     }
 
 
