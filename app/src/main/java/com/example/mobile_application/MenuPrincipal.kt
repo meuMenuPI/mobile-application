@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
+import com.example.mobile_application.adapter.MiniRestauranteAdapter
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityMenuPrincipalBinding
 import com.example.mobile_application.models.RestauranteReviewDto
@@ -62,7 +63,7 @@ class MenuPrincipal : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        val constraintLayoutCultura = ConstraintLayout(baseContext)
+        //val constraintLayoutCultura = ConstraintLayout(baseContext)
         //val constraintLayoutPerto = ConstraintLayout(baseContext)
 
 
@@ -72,77 +73,8 @@ class MenuPrincipal : AppCompatActivity() {
                 response: Response<List<RestauranteReviewDto>>
             ) {
 
-                val restaurantes = response.body()
-                restaurantes?.forEach{restaurante ->
+                binding.linearLayout4.adapter = MiniRestauranteAdapter(response.body())
 
-                    val constraintLayoutAvaliado = ConstraintLayout(baseContext)
-                    constraintLayoutAvaliado.id = View.generateViewId()
-
-                    val scale = resources.displayMetrics.density
-
-                    val layoutParamsAvaliado = ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    layoutParamsAvaliado.height = (80 * scale + 0.5f).toInt()
-                    layoutParamsAvaliado.width = (110 * scale + 0.5f).toInt()
-                    layoutParamsAvaliado.leftMargin = (15 * scale + 0.5f).toInt()
-                    constraintLayoutAvaliado.layoutParams = layoutParamsAvaliado
-                    constraintLayoutAvaliado.setBackgroundResource(R.drawable.borda_imagem)
-                    constraintLayoutAvaliado.setPadding((5 * scale + 0.5f).toInt())
-
-                    val image = ImageView(baseContext)
-                    image.id = View.generateViewId()
-                    image.layoutParams = ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.MATCH_PARENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT
-                    )
-
-                    image.setImageResource(R.drawable.sushi)
-                    val layoutParamsImage = image.layoutParams as ConstraintLayout.LayoutParams
-                    //layoutParamsImage.startToStart = constraintLayoutAvaliado.id
-                    //layoutParamsImage.topToTop = constraintLayoutAvaliado.id
-
-                    val nm_restaurante = TextView(baseContext)
-                    nm_restaurante.id = View.generateViewId()
-
-                    nm_restaurante.layoutParams = ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    nm_restaurante.text = restaurante.nome
-                    nm_restaurante.setTextColor(ContextCompat.getColor(baseContext,R.color.white))
-                    nm_restaurante.setTypeface(null, Typeface.BOLD)
-
-                    val layoutParams = ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    layoutParams.startToStart = constraintLayoutAvaliado.id
-                    layoutParams.endToEnd = constraintLayoutAvaliado.id
-                    layoutParams.topToTop = constraintLayoutAvaliado.id
-                    layoutParams.bottomToBottom = constraintLayoutAvaliado.id
-
-                    image.layoutParams = layoutParamsImage
-                    nm_restaurante.layoutParams = layoutParams
-
-                    constraintLayoutAvaliado.setOnClickListener{
-                        val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
-                        val editor = prefs.edit()
-                        editor.putInt("ID", restaurante.id)
-                        editor.putString("NOME", nm_restaurante.text.toString())
-                        editor.apply()
-                        val i = Intent(
-                            this@MenuPrincipal,
-                            RestauranteReview::class.java
-                        )
-                        startActivity(i)
-                    }
-
-                    constraintLayoutAvaliado.addView(image)
-                    constraintLayoutAvaliado.addView(nm_restaurante)
-                   binding.linearLayout4.addView(constraintLayoutAvaliado)
-                }
             }
 
             override fun onFailure(call: Call<List<RestauranteReviewDto>>, t: Throwable) {
