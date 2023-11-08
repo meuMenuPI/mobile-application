@@ -15,6 +15,8 @@ class MiniRestauranteAdapter(
         fun adaptar(MiniRestaurante : RestauranteReviewDto){
             layoutCard.findViewById<TextView>(R.id.nome_restaurante).text = MiniRestaurante.nome
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniRestauranteHolder {
