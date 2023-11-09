@@ -44,7 +44,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/editText"
+        android:id="@+id/barraPesquisa"
         android:layout_width="380dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -63,7 +63,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText">
+        app:layout_constraintTop_toBottomOf="@+id/barraPesquisa">
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,6 +164,15 @@
 
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <ListView
+        android:id="@+id/listaRestaurante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barraPesquisa" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
