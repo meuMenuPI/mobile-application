@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_application.R
 
@@ -14,6 +15,7 @@ class MiniEspecialidadeAdapter(
     inner class MiniRestauranteHolder(val layoutCard : View) : RecyclerView.ViewHolder(layoutCard){
         fun adaptar(MiniRestaurante : String){
             layoutCard.findViewById<TextView>(R.id.nome_restaurante).text = MiniRestaurante
+
         }
     }
 

@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import com.example.mobile_application.adapter.MiniEspecialidadeAdapter
 import com.example.mobile_application.adapter.MiniRestauranteAdapter
+import com.example.mobile_application.adapter.MiniUfAdapter
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityMenuPrincipalBinding
 import com.example.mobile_application.models.RestauranteDto
@@ -69,7 +71,8 @@ class MenuPrincipal : AppCompatActivity() {
             startActivity(i)
         }
 
-        var lista: MutableList<String> = mutableListOf()
+        var lista: MutableList<RestauranteDto> = mutableListOf()
+        var lista2: MutableList<String> = mutableListOf()
         val listaRes = binding.listaRestaurante
         var listAdapter: ArrayAdapter<String>
 
@@ -83,11 +86,12 @@ class MenuPrincipal : AppCompatActivity() {
                 Log.d("RESPOSTA", response.body().toString())
 
                 var listaTemp: List<RestauranteDto>? = response.body()
+                lista = listaTemp as MutableList<RestauranteDto>
+
                 listaTemp?.forEach { item ->
-                    lista.add(item.nome)
+                    lista2.add(item.nome)
                 }
 
-                Log.d("LISTATEMP", listaTemp.toString())
             }
 
             override fun onFailure(call: Call<List<RestauranteDto>>, t: Throwable) {
@@ -99,19 +103,39 @@ class MenuPrincipal : AppCompatActivity() {
         listAdapter = ArrayAdapter<String>(
             this@MenuPrincipal,
             android.R.layout.simple_list_item_1,
-            lista
+            lista2
         )
         listaRes.adapter = listAdapter
+        listaRes.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val restauranteClicavel = lista.find { item -> item.nome == (p1 as TextView).text }
+                val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
+                val editor = prefs.edit()
+                if (restauranteClicavel != null) {
+                    editor.putInt("ID", restauranteClicavel.id)
+                    editor.apply()
+                    val i = Intent(
+                        this@MenuPrincipal,
+                        RestauranteReview::class.java
+                    )
+                    startActivity(i)
+                }
+            }
+        })
 
         binding.barraPesquisa.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                if (lista?.contains(query)!!) {
+                if (lista2.contains(query)!!) {
                     listAdapter.filter.filter(query)
                     listaRes.visibility = View.VISIBLE
                 } else {
                     listaRes.visibility = View.INVISIBLE
-                    Toast.makeText(this@MenuPrincipal, "Restaurante não encontrado!", Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        this@MenuPrincipal,
+                        "Restaurante não encontrado!",
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
                 return false
@@ -138,8 +162,7 @@ class MenuPrincipal : AppCompatActivity() {
                 response: Response<List<RestauranteReviewDto>>
             ) {
 
-                binding.linearLayout4.adapter = MiniRestauranteAdapter(response.body())
-
+                binding.linearLayout4.adapter = MiniRestauranteAdapter(response.body(),::guiarReview)
             }
 
             override fun onFailure(call: Call<List<RestauranteReviewDto>>, t: Throwable) {
@@ -162,5 +185,48 @@ class MenuPrincipal : AppCompatActivity() {
                 Log.d("T_RESPONSE_ERRO", t.toString())
             }
         })
+
+
+        retrofit.filtrarUf("sp").enqueue(object : Callback<List<RestauranteReviewDto>> {
+            override fun onResponse(
+                call: Call<List<RestauranteReviewDto>>,
+                response: Response<List<RestauranteReviewDto>>
+            ) {
+
+                binding.linearLayout6.adapter = MiniUfAdapter(response.body(),::guiarReview)
+
+            }
+
+            override fun onFailure(call: Call<List<RestauranteReviewDto>>, t: Throwable) {
+                Log.d("T_RESPONSE_ERRO", t.toString())
+            }
+        })
+
+    }
+
+    fun guiarReview(restaurante: RestauranteReviewDto) {
+        val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putInt("ID", restaurante.id)
+        editor.apply()
+        val i = Intent(
+            this@MenuPrincipal,
+            RestauranteReview::class.java
+        )
+        startActivity(i)
+    }
+
+    fun guiarReview2(restaurante: RestauranteDto) {
+        val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putInt("ID", restaurante.id)
+        editor.apply()
+        val i = Intent(
+            this@MenuPrincipal,
+            RestauranteReview::class.java
+        )
+        startActivity(i)
     }
 }
+
+

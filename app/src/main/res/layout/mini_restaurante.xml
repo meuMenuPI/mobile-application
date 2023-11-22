@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutGeral"
         android:layout_width="110dp"
         android:layout_height="80dp"
         app:layout_constraintStart_toStartOf="parent"
