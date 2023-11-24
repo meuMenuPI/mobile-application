@@ -22,5 +22,19 @@ class EditarPerfil : AppCompatActivity() {
             )
             startActivity(i)
         }
+        binding.constraintSenha.setOnClickListener{
+            val i = Intent(
+                this@EditarPerfil,
+                TrocarSenha::class.java
+            )
+            startActivity(i)
+        }
+        binding.iconeSeta.setOnClickListener{
+            val i = Intent(
+                this@EditarPerfil,
+                PerfilUsuario::class.java
+            )
+            startActivity(i)
+        }
     }
 }

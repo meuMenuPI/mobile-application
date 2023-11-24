@@ -5,11 +5,7 @@ import com.example.mobile_application.models.CadastroRequest
 import com.example.mobile_application.models.LoginRequest
 import com.example.mobile_application.models.Usuario
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface UsuarioService {
     @POST("usuarios/logar")
@@ -27,4 +23,12 @@ interface UsuarioService {
     @POST("usuarios/cadastrar")
     fun cadastrar(@Body dadosRequest: CadastroRequest):
             retrofit2.Call<Usuario>
+
+    @PUT("usuarios/trocarSenha")
+    @FormUrlEncoded
+    fun trocarSenha(
+        @Query("id") id: Int,
+        @Query("senhaAtual") senhaAtual: String,
+        @Field("novaSenha") novaSenha: String
+    ): Call<String>
 }

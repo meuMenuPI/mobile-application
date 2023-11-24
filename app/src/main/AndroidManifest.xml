@@ -43,6 +43,9 @@
             android:name=".Cadastro2"
             android:exported="false" />
         <activity
+                android:name=".TrocarSenha"
+                android:exported="false" />
+        <activity
             android:name=".Logar"
             android:exported="true">
             <intent-filter>
