@@ -134,7 +134,7 @@ class MenuPrincipal : AppCompatActivity() {
                         editor.apply()
                         val i = Intent(
                             this@MenuPrincipal,
-                            RestauranteReview::class.java
+                            PerfilRestauranteCardapio::class.java
                         )
                         startActivity(i)
                     }
