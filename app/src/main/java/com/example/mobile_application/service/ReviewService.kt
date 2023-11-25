@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ReviewService {
-    @POST("/reviews")
+    @POST("reviews")
     fun cadastrarReview(@Body dados : Review):
             Call<Review>
 
