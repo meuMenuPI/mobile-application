@@ -19,6 +19,10 @@ interface RestauranteService {
     fun filtrarUf(@Query("uf") uf : String):
             Call<List<RestauranteReviewDto>>
 
+    @GET("restaurantes/filtrar/especialidade")
+    fun filtrarRestauranteEspecialidade(@Query("especialidade") especialidade : String):
+            Call<List<RestauranteReviewDto>>
+
     @GET("restaurantes")
     fun pegarRestaurante():
             Call<List<RestauranteDto>>

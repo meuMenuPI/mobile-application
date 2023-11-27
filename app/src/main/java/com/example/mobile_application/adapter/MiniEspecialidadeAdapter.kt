@@ -10,12 +10,15 @@ import com.example.mobile_application.R
 
 
 class MiniEspecialidadeAdapter(
-    val lista: List<String>?
+    val lista: List<String>?,
+    val onClick: (String) -> Unit
 ) : RecyclerView.Adapter<MiniEspecialidadeAdapter.MiniRestauranteHolder>() {
     inner class MiniRestauranteHolder(val layoutCard : View) : RecyclerView.ViewHolder(layoutCard){
         fun adaptar(MiniRestaurante : String){
             layoutCard.findViewById<TextView>(R.id.nome_restaurante).text = MiniRestaurante
-
+            layoutCard.findViewById<ConstraintLayout>(R.id.layoutGeral).setOnClickListener{
+                onClick(MiniRestaurante)
+            }
         }
     }
 

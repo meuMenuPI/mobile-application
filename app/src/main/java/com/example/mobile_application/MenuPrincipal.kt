@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,7 @@ import com.example.mobile_application.databinding.ActivityMenuPrincipalBinding
 import com.example.mobile_application.models.RestauranteDto
 import com.example.mobile_application.models.RestauranteReviewDto
 import com.example.mobile_application.service.RestauranteService
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,7 +75,7 @@ class MenuPrincipal : AppCompatActivity() {
         }
 
         var lista: MutableList<RestauranteDto> = mutableListOf()
-        var lista2: MutableList<String> = mutableListOf()
+        var listaNome: MutableList<String> = mutableListOf()
         val listaRes = binding.listaRestaurante
         var listAdapter: ArrayAdapter<String>
 
@@ -89,7 +92,7 @@ class MenuPrincipal : AppCompatActivity() {
                 lista = listaTemp as MutableList<RestauranteDto>
 
                 listaTemp?.forEach { item ->
-                    lista2.add(item.nome)
+                    listaNome.add(item.nome)
                 }
 
             }
@@ -103,7 +106,7 @@ class MenuPrincipal : AppCompatActivity() {
         listAdapter = ArrayAdapter<String>(
             this@MenuPrincipal,
             android.R.layout.simple_list_item_1,
-            lista2
+            listaNome
         )
         listaRes.adapter = listAdapter
         listaRes.setOnItemClickListener(object : AdapterView.OnItemClickListener {
@@ -126,7 +129,7 @@ class MenuPrincipal : AppCompatActivity() {
         binding.barraPesquisa.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                if (lista2.contains(query)!!) {
+                if (listaNome.contains(query)!!) {
                     listAdapter.filter.filter(query)
                     listaRes.visibility = View.VISIBLE
                 } else {
@@ -177,7 +180,7 @@ class MenuPrincipal : AppCompatActivity() {
                 response: Response<List<String>>
             ) {
 
-                binding.linearLayout5.adapter = MiniEspecialidadeAdapter(response.body())
+                binding.linearLayout5.adapter = MiniEspecialidadeAdapter(response.body(),::abrirModal)
 
             }
 
@@ -185,7 +188,6 @@ class MenuPrincipal : AppCompatActivity() {
                 Log.d("T_RESPONSE_ERRO", t.toString())
             }
         })
-
 
         retrofit.filtrarUf("sp").enqueue(object : Callback<List<RestauranteReviewDto>> {
             override fun onResponse(
@@ -216,17 +218,63 @@ class MenuPrincipal : AppCompatActivity() {
         startActivity(i)
     }
 
-    fun guiarReview2(restaurante: RestauranteDto) {
-        val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
-        val editor = prefs.edit()
-        editor.putInt("ID", restaurante.id)
-        editor.apply()
-        val i = Intent(
-            this@MenuPrincipal,
-            RestauranteReview::class.java
-        )
-        startActivity(i)
+    fun abrirModal(especialidade: String) {
+        val view = layoutInflater.inflate(R.layout.modal_restaurantes, null)
+        val dialog = BottomSheetDialog(this)
+        val btnClose = view.findViewById<Button>(R.id.btnFechar)
+        val mListView = view.findViewById<ListView>(R.id.listaRestaurante)
+        var listaNomeEspecialidade: MutableList<String> = mutableListOf()
+
+        val retrofitCallback = object : Callback<List<RestauranteReviewDto>> {
+            override fun onResponse(
+                call: Call<List<RestauranteReviewDto>>,
+                response: Response<List<RestauranteReviewDto>>
+            ) {
+                val listaResEspecialidade = response.body() as MutableList<RestauranteReviewDto>?
+                listaResEspecialidade?.let {
+                    listaNomeEspecialidade = it.map { item -> item.nome }.toMutableList()
+                    val arrayAdapter = ArrayAdapter(
+                        this@MenuPrincipal,
+                        android.R.layout.simple_list_item_1,
+                        listaNomeEspecialidade
+                    )
+                    mListView.adapter = arrayAdapter
+                }
+
+                mListView.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+                    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                        val restauranteClicavel = listaResEspecialidade?.find { item -> item.nome == (p1 as TextView).text }
+                        val prefs = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
+                        val editor = prefs.edit()
+                        if (restauranteClicavel != null) {
+                            editor.putInt("ID", restauranteClicavel.id)
+                            editor.apply()
+                            val i = Intent(
+                                this@MenuPrincipal,
+                                RestauranteReview::class.java
+                            )
+                            startActivity(i)
+                        }
+                    }
+                })
+            }
+
+            override fun onFailure(call: Call<List<RestauranteReviewDto>>, t: Throwable) {
+                Log.d("T_RESPONSE_ERRO", t.toString())
+            }
+        }
+
+        retrofit.filtrarRestauranteEspecialidade(especialidade).enqueue(retrofitCallback)
+
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.show()
     }
+
+
 }
 
 
