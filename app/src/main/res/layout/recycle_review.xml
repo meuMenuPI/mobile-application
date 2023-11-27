@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="125dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/perfil_loja_select"
+    android:backgroundTint="#D9D9D9">
+
+    <TextView
+        android:id="@+id/tvNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:text="Beatriz Gonzales"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/rbEstrelas"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNome" />
+
+    <TextView
+        android:id="@+id/tvTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="Há 51 minutos"
+        android:textColor="#808080"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rbEstrelas"
+        app:layout_constraintStart_toEndOf="@+id/rbEstrelas"
+        app:layout_constraintTop_toTopOf="@id/rbEstrelas" />
+
+    <TextView
+        android:id="@+id/tvDescricao"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:text="Lorem ipsum dolor sit amet. Quo mollitia similique in porro ratione in fugit sunt!"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbEstrelas" />
+</androidx.constraintlayout.widget.ConstraintLayout>

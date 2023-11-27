@@ -56,6 +56,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:$version") // Use a versão mais recente
     annotationProcessor("com.github.bumptech.glide:compiler:$version")
 
+    implementation("com.google.android.material:material:1.4.0")
+
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")

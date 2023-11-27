@@ -2,6 +2,8 @@ package com.example.mobile_application.service
 
 
 import com.example.mobile_application.models.CadastroRequest
+import com.example.mobile_application.models.Endereco
+import com.example.mobile_application.models.Favoritar
 import com.example.mobile_application.models.LoginRequest
 import com.example.mobile_application.models.Usuario
 import retrofit2.Call
@@ -31,4 +33,22 @@ interface UsuarioService {
         @Query("senhaAtual") senhaAtual: String,
         @Field("novaSenha") novaSenha: String
     ): Call<String>
+
+    @POST("usuarios/favoritar")
+    fun seguir(@Body dados : Favoritar)
+        : Call<List<Favoritar>>
+
+    @DELETE("usuarios/favoritar")
+    fun desfavoritar(@Query("fk_usuario") idUsuario: Int, @Query("fk_restaurante") idRestaurante: Int)
+        : Call<Void>
+
+    @GET("usuarios/favoritar")
+    fun getFavorito(@Query("fk_usuario") idUsuario: Int, @Query("fk_restaurante") idRestaurante: Int)
+        : Call<List<Int>>
+
+    @GET("restaurantes/endereco/{id}")
+    fun getEndereco(@Path("id") idRestaurante: Int)
+        : Call<Endereco>
+
+
 }
