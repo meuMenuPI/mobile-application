@@ -11,6 +11,9 @@ object Rest {
             //.baseUrl("https://meumenuweb.ddns.net/meumenu/")
             //Emulador
             .baseUrl("http:/10.0.2.2:8080/meumenu/")
+       //     .baseUrl("https://meumenuweb.ddns.net/meumenu/")
+            //PC caxixi
+           // .baseUrl("http://192.168.0.36:8080/meumenu/")
             //Pc Lucas
     //        .baseUrl("http:/192.168.18.41:8080/meumenu/")
             .addConverterFactory(GsonConverterFactory.create())

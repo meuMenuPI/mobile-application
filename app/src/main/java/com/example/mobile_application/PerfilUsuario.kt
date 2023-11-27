@@ -35,10 +35,33 @@ class PerfilUsuario : AppCompatActivity() {
 
         val pref = getSharedPreferences("USUARIO", MODE_PRIVATE)
         val nome = pref.getString("NOME", null)
+
+        fun maskEmail(email: String?): String {
+            if (email.isNullOrBlank()) {
+                return ""
+            }
+
+            val atIndex = email.indexOf('@')
+            if (atIndex <= 1) {
+                return email
+            }
+
+            val maskedEmail = StringBuilder(email)
+            for (i in 1 until atIndex) {
+                maskedEmail.setCharAt(i, '*')
+            }
+
+            return maskedEmail.toString()
+        }
+
+// Uso
         val email = pref.getString("EMAIL", null)
+        binding.email.text = maskEmail(email)
+
 
         binding.nomeUsuario.text = nome
-        binding.email.text = email
+        //val email = pref.getString("EMAIL", null)
+       // binding.email.text = email
 
     }
 }

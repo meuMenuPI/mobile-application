@@ -143,9 +143,9 @@ class MenuPrincipal : AppCompatActivity() {
                 }
                 return false
             }
-
-
+            
             override fun onQueryTextChange(newText: String?): Boolean {
+
 
                 listAdapter.filter.filter(newText)
                 listaRes.visibility = View.VISIBLE
