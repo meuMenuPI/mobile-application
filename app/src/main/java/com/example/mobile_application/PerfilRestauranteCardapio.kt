@@ -44,6 +44,14 @@ class PerfilRestauranteCardapio : AppCompatActivity() {
             startActivity(i)
         }
 
+        binding.button2.setOnClickListener{
+            val i = Intent(
+                this@PerfilRestauranteCardapio,
+                MapsActivity::class.java
+            )
+            startActivity(i)
+        }
+
         val pref = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
         val id = pref.getInt("ID", 0)
         val nome_restaurante = pref.getString("NOME", null)
