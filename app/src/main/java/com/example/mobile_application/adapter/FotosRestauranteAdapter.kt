@@ -15,7 +15,7 @@ class FotosRestauranteAdapter(
 
 ) : RecyclerView.Adapter<FotosRestauranteAdapter.FotoRestauranteHolder>() {
 
-    val link = "https://meumenuimagens.blob.core.windows.net/foto-suario/"
+    val link = "https://meumenuimagens.blob.core.windows.net/restaurante/"
 
     inner class FotoRestauranteHolder(private val binding: FotoRestauranteBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -25,8 +25,6 @@ class FotosRestauranteAdapter(
 
         Glide.with(context)
             .load(link + getData().nomeFoto)
-            .placeholder(R.drawable.fachada_loja) // Adicione um drawable de placeholder
-            .error(R.drawable.sushi)
             .into(binding.foto)
 
         }

@@ -1,5 +1,6 @@
 package com.example.mobile_application
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -9,13 +10,20 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mobile_application.adapter.CardapioAdapter
+import com.example.mobile_application.adapter.ReviewAdapter
 import com.example.mobile_application.api.Rest
 import com.example.mobile_application.databinding.ActivityRestauranteReviewBinding
+import com.example.mobile_application.models.Endereco
+import com.example.mobile_application.models.Favoritar
 import com.example.mobile_application.models.Review
 import com.example.mobile_application.service.ReviewService
+import com.example.mobile_application.service.UsuarioService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,9 +38,65 @@ class RestauranteReview : AppCompatActivity() {
         Rest.getInstance().create(ReviewService::class.java)
     }
 
+    private val retrofitUsuario by lazy {
+        Rest.getInstance().create(UsuarioService::class.java)
+    }
+
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val pref = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
+        val prefUsuario = getSharedPreferences("USUARIO" , MODE_PRIVATE)
+        val idUsuario = prefUsuario.getString("ID", null)
+        val id = pref.getInt("ID", 0)
+        val nome_restaurante = pref.getString("NOME", null)
+        Log.d("Id Restaurante", id.toString())
+        Log.d("Nome Restaurante", nome_restaurante.toString())
+
+        binding.textView.text = nome_restaurante.toString()
+
+
+            retrofitUsuario.getFavorito(idUsuario!!.toInt(),id).enqueue(object : Callback<List<Int>>{
+                override fun onResponse(call: Call<List<Int>>, response: Response<List<Int>>) {
+                    val lista = response.body()
+                    println("lista: $lista")
+                    if (lista != null && lista.isNotEmpty()) {
+                        if (lista[0] == 0) {
+                            binding.btnSeguir.visibility = View.VISIBLE
+                            binding.btnDesfavoritar.visibility = View.INVISIBLE
+                        } else {
+                            binding.btnSeguir.visibility = View.INVISIBLE
+                            binding.btnDesfavoritar.visibility = View.VISIBLE
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Int>>, t: Throwable) {
+                    Toast.makeText(this@RestauranteReview, t.message, Toast.LENGTH_LONG).show()
+                }
+
+
+            })
+
+        retrofitUsuario.getEndereco(id).enqueue(object : Callback<Endereco>{
+            override fun onResponse(call: Call<Endereco>, response: Response<Endereco>) {
+                println("Endereco " + response.body())
+                val endereco = response.body()
+                if (endereco != null) {
+                    binding.tvEndereco.text = "CEP: " + endereco.cep + " N°"+ endereco!!.numero.toString() + " " + endereco.uf
+                }
+            }
+
+            override fun onFailure(call: Call<Endereco>, t: Throwable) {
+                Toast.makeText(this@RestauranteReview, t.message, Toast.LENGTH_LONG).show()
+            }
+
+        })
+
+
+
 
         binding.btnVltMenu.setOnClickListener{
             val i = Intent(
@@ -42,13 +106,71 @@ class RestauranteReview : AppCompatActivity() {
             startActivity(i)
         }
 
-        val pref = getSharedPreferences("RESTAURANTE", MODE_PRIVATE)
-        val id = pref.getInt("ID", 0)
-        val nome_restaurante = pref.getString("NOME", null)
-        Log.d("Id Restaurante", id.toString())
-        Log.d("Nome Restaurante", nome_restaurante.toString())
+        binding.btnCardapio.setOnClickListener{
+            val i = Intent(
+                this@RestauranteReview,
+                PerfilRestauranteCardapio::class.java
+            )
+            startActivity(i)
+        }
 
-        binding.textView.text = nome_restaurante.toString()
+        binding.btnFotos.setOnClickListener{
+            val i = Intent(
+                this@RestauranteReview,
+                PerfilRestauranteFoto::class.java
+            )
+            startActivity(i)
+        }
+
+        binding.btnCadastrarReview.setOnClickListener{
+            val i = Intent(
+                this@RestauranteReview,
+                CadastrarReview::class.java
+            )
+            startActivity(i)
+        }
+
+
+        binding.btnSeguir.setOnClickListener {
+            val dados = Favoritar(
+                fk_restaurante = id,
+                fk_usuario = idUsuario!!.toInt()
+            )
+            retrofitUsuario.seguir(dados).enqueue(object : Callback<List<Favoritar>>{
+                override fun onResponse(
+                    call: Call<List<Favoritar>>,
+                    response: Response<List<Favoritar>>
+                ) {
+                    Toast.makeText(this@RestauranteReview, "Obrigado por nos seguir!", Toast.LENGTH_LONG).show()
+                    binding.btnSeguir.visibility = View.INVISIBLE
+                    binding.btnDesfavoritar.visibility = View.VISIBLE
+
+                }
+
+                override fun onFailure(call: Call<List<Favoritar>>, t: Throwable) {
+                    Toast.makeText(this@RestauranteReview, t.message, Toast.LENGTH_LONG).show()
+                }
+
+
+            })
+        }
+
+        binding.btnDesfavoritar.setOnClickListener {
+            retrofitUsuario.desfavoritar(idUsuario!!.toInt(),id).enqueue(object : Callback<Void>{
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Toast.makeText(this@RestauranteReview, "Você deixou de seguir o restaurante!", Toast.LENGTH_LONG).show()
+                    binding.btnSeguir.visibility = View.VISIBLE
+                    binding.btnDesfavoritar.visibility = View.INVISIBLE
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(this@RestauranteReview, t.message, Toast.LENGTH_LONG).show()
+                }
+
+
+            })
+        }
+
 
         if (id != null) {
             retrofit.getReview(id).enqueue(object : Callback<List<Review>> {
@@ -57,96 +179,14 @@ class RestauranteReview : AppCompatActivity() {
                     response: Response<List<Review>>
                 ) {
 
-                    val reviews = response.body()
-                    println("Reviews$reviews")
-                    reviews?.forEach { Review ->
+                    binding.recycleReview.apply {
+                        layoutManager = LinearLayoutManager(
+                            this@RestauranteReview,
 
-                        val constraintLayoutReview = ConstraintLayout(baseContext)
-                        constraintLayoutReview.id = View.generateViewId()
-
-                        val scale = resources.displayMetrics.density
-
-                        val layoutParamsReview = ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT
-                        )
-
-                        layoutParamsReview.leftMargin = (15 * scale + 0.5f).toInt()
-                        constraintLayoutReview.layoutParams = layoutParamsReview
-
-                        val nomeView = TextView(baseContext)
-                        nomeView.id = View.generateViewId()
-                        val layoutParamsNome = ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT
-                        )
-                        nomeView.text = Review.nome
-                        nomeView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
-                        nomeView.setTextColor(ContextCompat.getColor(baseContext, R.color.black))
-                        nomeView.setTypeface(null, Typeface.BOLD)
-
-                        layoutParamsNome.topToTop = constraintLayoutReview.id
-                        layoutParamsNome.startToStart = constraintLayoutReview.id
-
-                        val estrelas = RatingBar(baseContext)
-                        estrelas.id = View.generateViewId()
-                        val layoutParamsEstrela = ConstraintLayout.LayoutParams(
-                            100,
-                            30
-                        )
-
-                        estrelas.setPadding(20, 8, 0, 0)
-                        estrelas.numStars = 5
-                        estrelas.rating = 3.5f
-                        estrelas.stepSize = 0.5f
-
-                        layoutParamsEstrela.topToBottom = nomeView.id
-                        layoutParamsEstrela.startToStart = nomeView.id
-
-
-                        estrelas.layoutParams = layoutParamsEstrela
-
-                        val tempo = TextView(baseContext)
-                        tempo.id = View.generateViewId()
-                        tempo.text = Review.data_hora
-                        tempo.setTextColor(Color.parseColor("#808080"))
-                        tempo.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12f)
-
-                        val layoutParamsTempo = ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT
-                        )
-
-                        layoutParamsTempo.startToEnd = estrelas.id
-                        layoutParamsTempo.topToTop = estrelas.id
-                        tempo.layoutParams = layoutParamsTempo
-
-                        val descricao = TextView(baseContext)
-                        descricao.id = View.generateViewId()
-                        descricao.text = Review.descricao
-                        descricao.setTextColor(ContextCompat.getColor(baseContext, R.color.black))
-                        descricao.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
-                        Log.d("descrição", Review.descricao.toString())
-
-                        val layoutParamsDescricao = ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT
-                        )
-
-                        layoutParamsDescricao.topToBottom = tempo.id
-                        layoutParamsDescricao.startToStart = estrelas.id
-
-                        descricao.layoutParams = layoutParamsDescricao
-
-                        constraintLayoutReview.addView(nomeView)
-                        constraintLayoutReview.addView(estrelas)
-                        constraintLayoutReview.addView(tempo)
-                        constraintLayoutReview.addView(descricao)
-
-                        val novaReviewLayout = binding.novaReview
-                        novaReviewLayout.addView(constraintLayoutReview)
-
+                            )
+                        adapter = ReviewAdapter(response.body(), this@RestauranteReview)
                     }
+
                 }
 
                 override fun onFailure(call: Call<List<Review>>, t: Throwable) {
