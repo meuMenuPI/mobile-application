@@ -15,7 +15,7 @@ class FotosRestauranteAdapter(
 
 ) : RecyclerView.Adapter<FotosRestauranteAdapter.FotoRestauranteHolder>() {
 
-    val link = "https://meumenuimagens.blob.core.windows.net/foto-suario/"
+    val link = "https://meumenuimagens.blob.core.windows.net/restaurante/"
 
     inner class FotoRestauranteHolder(private val binding: FotoRestauranteBinding) :
         RecyclerView.ViewHolder(binding.root) {

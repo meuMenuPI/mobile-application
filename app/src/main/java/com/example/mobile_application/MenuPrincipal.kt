@@ -165,7 +165,7 @@ class MenuPrincipal : AppCompatActivity() {
                 response: Response<List<RestauranteReviewDto>>
             ) {
 
-                binding.linearLayout4.adapter = MiniRestauranteAdapter(response.body(),::guiarReview)
+                binding.linearLayout4.adapter = MiniRestauranteAdapter(response.body(),::guiarReview, this@MenuPrincipal)
             }
 
             override fun onFailure(call: Call<List<RestauranteReviewDto>>, t: Throwable) {
@@ -195,7 +195,7 @@ class MenuPrincipal : AppCompatActivity() {
                 response: Response<List<RestauranteReviewDto>>
             ) {
 
-                binding.linearLayout6.adapter = MiniUfAdapter(response.body(),::guiarReview)
+                binding.linearLayout6.adapter = MiniUfAdapter(response.body(),::guiarReview,this@MenuPrincipal)
 
             }
 
@@ -213,7 +213,7 @@ class MenuPrincipal : AppCompatActivity() {
         editor.apply()
         val i = Intent(
             this@MenuPrincipal,
-            RestauranteReview::class.java
+            PerfilRestauranteCardapio::class.java
         )
         startActivity(i)
     }

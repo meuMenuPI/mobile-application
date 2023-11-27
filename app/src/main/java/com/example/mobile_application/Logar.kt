@@ -49,15 +49,6 @@ class Logar : AppCompatActivity() {
         //val meuBotao = findViewById<Button>(R.id.buttonEntrar)
         val meuBotao = binding.buttonEntrar
 
-
-        binding.textCadastro.setOnClickListener{
-            val i = Intent(
-                this@Logar,
-                Cadastro::class.java
-            )
-            startActivity(i)
-        }
-
         meuBotao.setOnClickListener {
             logar()
         }
