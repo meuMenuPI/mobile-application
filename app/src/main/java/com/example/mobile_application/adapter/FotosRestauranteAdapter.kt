@@ -25,8 +25,6 @@ class FotosRestauranteAdapter(
 
         Glide.with(context)
             .load(link + getData().nomeFoto)
-            .placeholder(R.drawable.fachada_loja) // Adicione um drawable de placeholder
-            .error(R.drawable.sushi)
             .into(binding.foto)
 
         }

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Mobileapplication"
         tools:targetApi="31">
         <activity
+            android:name=".CadastrarReview"
+            android:exported="false" />
+        <activity
             android:name=".PerfilRestauranteCardapio"
             android:exported="false" />
         <activity
@@ -49,8 +52,8 @@
             android:name=".Cadastro2"
             android:exported="false" />
         <activity
-                android:name=".TrocarSenha"
-                android:exported="false" />
+            android:name=".TrocarSenha"
+            android:exported="false" />
         <activity
             android:name=".Logar"
             android:exported="true">
